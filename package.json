@@ -1,0 +1,33 @@
+{
+  "name": "fundamentos-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/guilhermetupi/fundamentos-react.git",
+  "author": "Guilherme Tupinambá Durães <40327476+guilhermetupi@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.3",
+    "clean-webpack-plugin": "^4.0.0",
+    "css-loader": "^6.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3"
+  }
+}
