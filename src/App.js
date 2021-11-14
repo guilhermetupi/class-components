@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { Component } from "react";
 import { ThemeProvider } from "styled-components";
 
 import GlobalStyle from "./styles/global";
@@ -6,26 +6,59 @@ import Layout from "./components/Layout";
 
 import themes from "./styles/themes";
 
-function App() {
-  console.log(localStorage.getItem("theme"));
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-  const currentTheme = useMemo(() => themes[theme] || themes.dark, [theme]);
+    this.state = {
+      theme: "dark",
+      // handleToggleTheme: () =>
+      //   this.setState({
+      //     theme: this.state.theme === "dark" ? "light" : "dark",
+      //   }),
+    };
 
-  function handleToggleTheme() {
-    setTheme(theme === "dark" ? "light" : "dark");
+    this.handleToggleTheme = this.handleToggleTheme.bind(this);
   }
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  handleToggleTheme() {
+    this.setState({
+      theme: this.state.theme === "dark" ? "light" : "dark",
+    });
+  }
 
-  return (
-    <ThemeProvider theme={currentTheme}>
-      <GlobalStyle />
-      <Layout onToggleTheme={handleToggleTheme} selectedTheme={theme} />
-    </ThemeProvider>
-  );
+  render() {
+    const { theme } = this.state;
+
+    return (
+      <ThemeProvider theme={themes[theme] || themes.dark}>
+        <GlobalStyle />
+        <Layout onToggleTheme={this.handleToggleTheme} selectedTheme={theme} />
+      </ThemeProvider>
+    );
+  }
 }
+
+// function App() {
+//   console.log(localStorage.getItem("theme"));
+//   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+//   const currentTheme = useMemo(() => themes[theme] || themes.dark, [theme]);
+
+//   function handleToggleTheme() {
+//     setTheme(theme === "dark" ? "light" : "dark");
+//   }
+
+//   useEffect(() => {
+//     localStorage.setItem("theme", theme);
+//   }, [theme]);
+
+// return (
+//   <ThemeProvider theme={currentTheme}>
+//     <GlobalStyle />
+//     <Layout onToggleTheme={handleToggleTheme} selectedTheme={theme} />
+//   </ThemeProvider>
+// );
+// }
 
 export default App;
