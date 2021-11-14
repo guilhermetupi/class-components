@@ -1,39 +1,26 @@
-import React, { Component } from "react";
-import { ThemeProvider } from "styled-components";
+import React, { Component } from 'react';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { ThemeProvider, ThemeContext } from './contexts/ThemeContext';
 
-import GlobalStyle from "./styles/global";
-import Layout from "./components/Layout";
+import GlobalStyle from './styles/global';
+import Layout from './components/Layout';
 
-import themes from "./styles/themes";
+import themes from './styles/themes';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      theme: "dark",
-      // handleToggleTheme: () =>
-      //   this.setState({
-      //     theme: this.state.theme === "dark" ? "light" : "dark",
-      //   }),
-    };
-
-    this.handleToggleTheme = this.handleToggleTheme.bind(this);
-  }
-
-  handleToggleTheme() {
-    this.setState({
-      theme: this.state.theme === "dark" ? "light" : "dark",
-    });
-  }
+  handleForceRender = () => this.forceUpdate(); // Força renderização do componente
 
   render() {
-    const { theme } = this.state;
-
     return (
-      <ThemeProvider theme={themes[theme] || themes.dark}>
-        <GlobalStyle />
-        <Layout onToggleTheme={this.handleToggleTheme} selectedTheme={theme} />
+      <ThemeProvider>
+        <ThemeContext.Consumer>
+          {({ theme, handleToggleTheme }) => (
+            <StyledThemeProvider theme={themes[theme]}>
+              <GlobalStyle />
+              <Layout />
+            </StyledThemeProvider>
+          )}
+        </ThemeContext.Consumer>
       </ThemeProvider>
     );
   }
