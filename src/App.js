@@ -8,7 +8,7 @@ import Layout from './components/Layout';
 import themes from './styles/themes';
 
 class App extends Component {
-  handleForceRender = () => this.forceUpdate(); // Força renderização do componente
+  // handleForceRender = () => this.forceUpdate(); // Força renderização do componente
 
   render() {
     return (
