@@ -8,11 +8,43 @@ import Layout from './components/Layout';
 import themes from './styles/themes';
 
 class App extends Component {
+  state = {
+    changed: false,
+  };
+
+  componentDidMount() {
+    console.log('App componentDidMount');
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App componentDidUpdate', {
+      currentState: this.state,
+      prevState,
+    });
+  }
+
+  componentDidCatch(error, info) {
+    console.log({ error, info });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log({
+      currentState: this.state,
+      nextState,
+      nextProps,
+    });
+
+    return this.state.changed;
+  }
+
   // handleForceRender = () => this.forceUpdate(); // Força renderização do componente
 
   render() {
     return (
       <ThemeProvider>
+        <button onClick={() => this.setState({ changed: !this.state.changed })}>
+          Change state
+        </button>
         <ThemeContext.Consumer>
           {({ theme, handleToggleTheme }) => (
             <StyledThemeProvider theme={themes[theme]}>

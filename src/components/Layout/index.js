@@ -5,14 +5,37 @@ import Header from '../Header';
 import PostsList from '../PostsList';
 import Footer from '../Footer';
 
-export default function Layout() {
-  const theme = useTheme();
+export default class Layout extends React.Component {
+  componentDidMount() {
+    document.addEventListener('scroll', this.handleScroll);
+  }
 
-  return (
-    <>
-      <Header />
-      <PostsList />
-      <Footer />
-    </>
-  );
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.handleScroll);
+    console.log('unmount');
+  }
+
+  handleScroll = () => {
+    console.log('scroll');
+  };
+
+  render() {
+    return (
+      <>
+        <Header />
+        <PostsList />
+        <Footer />
+      </>
+    );
+  }
 }
+
+// export default function Layout() {
+//   return (
+//     <>
+//       <Header />
+//       <PostsList />
+//       <Footer />
+//     </>
+//   );
+// }
