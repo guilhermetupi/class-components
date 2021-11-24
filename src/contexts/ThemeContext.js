@@ -19,13 +19,13 @@ export class ThemeProvider extends React.Component {
 
   componentDidUpdate(_, prevState) {
     if (prevState.theme !== this.state.theme) { // monitorar mudanças no estado
-      console.log('tema mudou')
+      console.log('tema mudou');
     }
   }
 
   handleToggleTheme = () => {
     this.setState((prevState) => ({ theme: prevState.theme === 'dark' ? 'light' : 'dark' }), () => localStorage.setItem('theme', JSON.stringify(this.state.theme)));
-  }
+  };
 
   render() {
     return (
